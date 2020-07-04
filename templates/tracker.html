@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CovidBot</title>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <a href="/chatbot">Go To Chatbot</a>
+<a href="/tracker">Go To Covid-Tracker</a>
+	<h1>Covid-19-Tracker</h1>
+    <br/>
+    <h2>Get the latest data about Corona cases in the following countries:</h2>
+    <br/>
+    <form action="/answer" method="post">
+
+      <select name="countryyy" class="select-css">
+        <option value="">Please choose</option>
+        <option value="Algeria">Algeria</option>
+        <option value="Argentina">Argentina</option>
+           <option value="Armenia">Armenia</option>
+           <option value="Australia">Australia</option>
+           <option value="Austria">Austria</option>
+           <option value="Bahrain">Bahrain</option>
+           <option value="Belgium">Belgium</option>
+           <option value="Brazil">Brazil</option>
+            <option value="Canada">Canada</option>
+            <option value="Chile">Chile</option>
+            <option value="China">China</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Croatia">Croatia</option>
+            <option value="Czechia">Czechia</option>
+            <option value="Dominican Republic">Dominican Republic</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Egypt">Egypt</option>
+            <option value="Estonia">Estonia</option>
+            <option value="Finland">Finland</option>
+            <option value="France">France</option>
+            <option value="Germany">Germany</option>
+            <option value="Greece">Greece</option>
+            <option value="Hong Kong">Hong Kong</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Iceland">Iceland</option>
+            <option value="India">India</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="Iran">Iran</option>
+            <option value="Iraq">Iraq</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Israel">Israel</option>
+            <option value="Italy">Italy</option>
+            <option value="Japan">Japan</option>
+            <option value="Kuwait">Kuwait</option>
+            <option value="Lithuania">Lithuania</option>
+            <option value="Luxembourg">Luxembourg</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Moldova">Moldova</option>
+            <option value="Morocco">Morocco</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Norway">Norway</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Panama">Panama</option>
+            <option value="Peru">Peru</option>
+            <option value="Philippines">Philippines</option>
+            <option value="Poland">Poland</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Qatar">Qatar</option>
+            <option value="Romania">Romania</option>
+            <option value="Russia">Russia</option>
+            <option value="Saudi Arabia">Saudi Arabia</option>
+            <option value="Serbia">Serbia</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Slovenia">Slovenia</option>
+            <option value="South Africa">South Africa</option>
+            <option value="South Korea">South Korea</option>
+            <option value="Spain">Spain</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Thailand">Thailand</option>
+            <option value="Turkey">Turkey</option>
+            <option value="UAE">UAE</option>
+            <option value="UK">UK</option>
+            <option value="Ukraine">Ukraine</option>
+            <option value="USA">USA</option>
+         </select>
+
+         <button  type="submit" class="btn" name="button"><strong>Check</strong></button>
+         {%if show == True%}
+         <h1> Total Cases: {{cases}}</h1>
+          <h1> Active Cases: {{active}}</h1>
+          <h1> Recovered: {{recovered}}</h1>
+          <h1> Dead: {{deaths}}</h1>
+          <h1> New Cases: {{todayCases}}</h1>
+          <h1> New Deaths: {{todayDeaths}}</h1>
+          <h1> Critical: {{critical}}</h1>
+        {% endif %}
+    </form> 
+</body>
+
+</div>

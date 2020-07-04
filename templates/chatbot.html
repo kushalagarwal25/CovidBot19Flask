@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CovidBot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style44.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- <div class="row-full"> -->
+    
+  <!-- partial:index.partial.html -->
+  
+  <!-- <div class="row"> -->
+    <!-- <a href="/chatbot">Go To Chatbot</a> -->
+    <!-- <a href="/tracker">Go To Covid-Tracker</a> -->
+    <div class="column">
+      <section class="msger">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 0px;">
+    <a class="navbar-brand" href="#"><strong><a href="/" style="color:white">CovidBot</a></strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+      <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/chatbot">Covid Chatbot <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tracker">Covid Tracker</a>
+      </li>
+      
+    </div >
+    </nav>
+
+        <main class="msger-chat">
+          <div class="msg left-msg">
+            <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/1786/1786548.svg)"></div>
+
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">CoronaBot</div>
+                <div class="msg-info-time"><span id="datetime"></span></div>
+              </div>
+
+              <div class="msg-text">
+                Hello, hope you are staying at home safe. Welcome to Covid-19 Bot , I am here to answer your all chatbot related Faq's(To know how bot works type /help/ (slashes are important)). <br>Choose any one of the given intent: /testing, /general, /prevention_and_protection, /spread, /service, /info, /mental_health_and_fitness, /myths_and_rumours, /cure, /child_women_pet, /symptoms, /movement, /gathering, /impact_of_corona, /help
+              </div>
+            </div>
+          </div>
+
+        </main>
+        
+        <form class="msger-inputarea">
+          <div class="outer">
+            <div class="horizontal">
+              <div class="inner"><button onclick="myFunction1()"><p id="p1">What are symptoms of covid?</p></button></div>
+              <div class="inner"><button onclick="myFunction2()"><p id="p2">Treatment of covid</p></button></div>
+              <div class="inner"><button onclick="myFunction3()"><p id="p3">Prevention from covid</p></button></div>
+            </div>
+            <!-- <button type="submit" class="msger-send-btn1"></button> -->
+            <!-- <button type="submit" class="msger-send-btn2"></button> -->
+            <!-- <button type="submit" class="msger-send-btn3"></button> -->
+            <div class="bottom">
+            <input type="text" class="msger-input" id="textInput" placeholder="Type Something...">
+            <button type="submit" class="msger-send-btn">Send</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  <!-- </div> -->
+  <!-- partial -->
+  <!-- </div> -->
+  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <script>
+
+    (function () {
+        function checkTime(i) {
+            return (i < 10) ? "0" + i : i;
+        }
+
+        function startTime() {
+            var today = new Date(),
+                h = checkTime(today.getHours()),
+                m = checkTime(today.getMinutes()),
+                s = checkTime(today.getSeconds());
+            document.getElementById('datetime').innerHTML = h + ":" + m;
+            t = setTimeout(function () {
+                startTime()
+            }, 500);
+        }
+        startTime();
+    })();
+    const msgerForm = get(".msger-inputarea");
+    const msgerInput = get(".msger-input");
+    const msgerChat = get(".msger-chat");
+
+
+    // Icons made by Freepik from www.flaticon.com
+    const BOT_IMG = "https://image.flaticon.com/icons/svg/1786/1786548.svg";
+    const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
+    const BOT_NAME = "CovidBot";
+    const PERSON_NAME = "You";
+
+    msgerForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const msgText = msgerInput.value;
+      if (!msgText) return;
+
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+      msgerInput.value = "";
+      botResponse(msgText);
+    });
+    function myFunction1() {
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", document.getElementById("p1").innerHTML);
+      botResponse(document.getElementById("p1").innerHTML);
+    }
+    function myFunction2() {
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", document.getElementById("p2").innerHTML);
+      botResponse(document.getElementById("p2").innerHTML);
+    }
+    function myFunction3() {
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", document.getElementById("p3").innerHTML);
+      botResponse(document.getElementById("p3").innerHTML);
+    }
+    function appendMessage(name, img, side, text) {
+      //   Simple solution for small apps
+      const msgHTML = `
+<div class="msg ${side}-msg">
+<div class="msg-img" style="background-image: url(${img})"></div>
+  <div class="msg-bubble">
+    <div class="msg-info">
+      <div class="msg-info-name">${name}</div>
+      <div class="msg-info-time">${formatDate(new Date())}</div>
+    </div>
+
+    <div class="msg-text">${text}</div>
+  </div>
+</div>
+`;
+
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+    }
+
+    function botResponse(rawText) {
+
+      // Bot Response
+      $.get("/get", { msg: rawText }).done(function (data) {
+        console.log(rawText);
+        console.log(data);
+        const msgText = data;
+        var res = data.split("^");
+        var q = res[1].split("@");
+        document.getElementById("p1").innerHTML = q[0];
+        document.getElementById("p2").innerHTML = q[1];
+        document.getElementById("p3").innerHTML = q[2];
+        appendMessage(BOT_NAME, BOT_IMG, "left", res[0]);
+
+      });
+
+    }
+
+    function clickResponse(rawText) {
+
+      // Bot Response
+      $.get("/get", { msg: rawText }).done(function (data) {
+        console.log(rawText);
+        console.log(data);
+        const msgText = data;
+        q1 = l[0]
+        q1 = l[1]
+        q1 = l[2]
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+
+      });
+
+    }
+
+
+    // Utils
+    function get(selector, root = document) {
+      return root.querySelector(selector);
+    }
+
+    function formatDate(date) {
+      const h = "0" + date.getHours();
+      const m = "0" + date.getMinutes();
+
+      return `${h.slice(-2)}:${m.slice(-2)}`;
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
