@@ -31,12 +31,17 @@ def merge_two_dicts(x, y):
 	z.update(y)    # modifies z with y's keys and values & returns None
 	return z
 
-
-pickle_in1 = open('res1.pickle','rb')
+pickle_in1 = open('wv1.pickle','rb')
 res1 = pickle.load(pickle_in1)
-pickle_in2 = open('res2.pickle','rb')
+pickle_in2 = open('wv2.pickle','rb')
 res2 = pickle.load(pickle_in2)
+pickle_in1.close()
+pickle_in2.close()
 w2v = merge_two_dicts(res1,res2)
+for i in range(3,9):
+    pickle_in = open('wv{}.pickle'.format(i),'rb')
+    w2v = merge_two_dicts(w2v,pickle.load(pickle_in))
+    pickle_in.close()
 pickle_in3 = open('vocab.pickle','rb')
 vocab = pickle.load(pickle_in3)
 
@@ -83,12 +88,12 @@ def overall_similarity(q1,data_set):
 intents = np.unique(list(data_set.iloc[:]['Intent']))
 dataset = data_set
 l = []
-def reply(sym_spell,input_term,isHindi=True):
+def reply(sym_spell,input_term,isHindi=False):
 	global dataset
 	global l
 	print(input_term)
 	# isHindi = False
-	if isHindi:
+	if isHindi==False:
 		t=translator.detect(input_term)
 		if t.lang=="hi":
 			print("LAJSLJHFJ")
