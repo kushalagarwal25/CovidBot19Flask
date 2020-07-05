@@ -43,7 +43,6 @@ vocab = pickle.load(pickle_in3)
 def spelling_correction(sym_spell,input_term):
 	suggestions = sym_spell.lookup_compound(input_term, max_edit_distance=2)
 	sentence = []
-	# print(len(suggestions))
 	for suggestion in suggestions:
 		sentence.append(str(suggestion).split(',')[0])
 	return sentence
@@ -57,7 +56,6 @@ def overall_similarity(q1,data_set):
 	x = len(q1_clean)
 	for i in range(data_set.shape[0]):
 		q2 = data_set.iloc[i]['Question']
-#         print(q2)
 		q2_clean = [ct2.getClearReview(i) for i in [q2]][0].split()
 		ans = 0;
 		for w1 in q1_clean:
@@ -87,7 +85,6 @@ def reply(sym_spell,input_term,isHindi=False):
 	global dataset
 	global l
 	print(input_term)
-	# isHindi = False
 	if isHindi==False:
 		t=translator.detect(input_term)
 		if t.lang=="hi":
@@ -98,14 +95,10 @@ def reply(sym_spell,input_term,isHindi=False):
 			isHindi = True
 	default_message = """Hello, hope you are staying at home safe. Welcome to Covid-19 Bot , I am here to answer your all chatbot related Faq's(To know how bot works type /help/ (slashes are important)). <br>Choose any one of the given intent: /testing/, /general/, /prevention_and_protection/, /spread/, /service/, /info/, /mental_health_and_fitness/, /myths_and_rumours/, /cure/, /child_women_pet/, /symptoms/, /movement/, /gathering/, /impact_of_corona/, /help"    help_message = "Hello, I am Covid 19 bot , How this bot works: this bot answers question related to all Covid 19 queries. First you need to choose a specific intent and then bot will suggest you  more question. Type any one of the question and bot will answer that question. If you want to ask any other intent question then type /main_menu/ and if any other question from same intent , then type that question and bot will answer that question and suggest more three question siilar to that question."""
 	help_message = """Hello, I am Covid 19 bot , How this bot works: this bot answers question related to all Covid 19 queries. First you need to choose a specific intent and then bot will suggest you  more question. Type any one of the question and bot will answer that question. If you want to ask any other intent question then type /main_menu/ and if any other question from same intent , then type that question and bot will answer that question and suggest more three question siilar to that question. <br>Choose any one of the given intent: /testing/, /general/, /prevention_and_protection/, /spread/, /service/, /info/, /mental_health_and_fitness/, /myths_and_rumours/, /cure/, /child_women_pet/, /symptoms/, /movement/, /gathering/, /impact_of_corona/, /help"""
-	# input_term = input_term.lower()
 	extra_response = '/main menu/'
 	last_ques = "For choosing other Faq from other intent type /main menu/ for going back"
 	question = ""
 	options = ""
-#     if(input_term == extra_response):
-#         dataset = data_set
-#         return default_message
 	if(input_term == '/help/' or input_term=='/main_menu'):
 		dataset = data_set
 		if isHindi:
@@ -133,7 +126,7 @@ def reply(sym_spell,input_term,isHindi=False):
 		# 	return answer
 
 		if input_term[1:] in intents:
-			print(input_term)
+			# print(input_term)
 			l = []
 	#         if(input_term == i):
 			dataset = data_set[data_set['Intent']== input_term[1:]]
@@ -143,7 +136,7 @@ def reply(sym_spell,input_term,isHindi=False):
 				question = translator.translate(question,dest='hi').text
 			question += "^"
 			for i in range(len(dataset.iloc[:3]['Question'])):
-				print('hi')
+				# print('hi')
 				# question += str(i+1)
 				# question += ". "
 				if isHindi:
@@ -163,7 +156,7 @@ def reply(sym_spell,input_term,isHindi=False):
 	input_term = input_term.replace('corona virus','coronavirus')
 	input_term = input_term.replace(' ovid' , ' coronavirus')
 	input_term = input_term.replace('kovid' , ' covid')
-	print(input_term)
+	# print(input_term)
 	#intent predict
 	unique_intent=['general','mental_health_and_fitness','movement','smalltalk','child_women_pet','myths_and_rumours','spread','service','symptoms','testing','help','info','prevention_and_protection','impact_of_corona','gathering','cure']
 	# pred = predictions(input_term)
@@ -189,7 +182,7 @@ def reply(sym_spell,input_term,isHindi=False):
 			else:
 				answer += data_set.iloc[np.argmax(similarity2)]['Question']+"@"
 		# return dataset.iloc[np.argmax(similarity)]['Answer']
-		print(answer)
+		# print(answer)
 		# if isHindi:
 		# 	answer = translator.translate(answer,dest='hi').text
 		# 	print(answer) 
@@ -252,12 +245,12 @@ def get_bot_response():
 	userText = request.args.get('msg')
 	return reply(sym_spell,userText)
 
-@app.route('/submit')
-def submit():
-	for key, value in request.form.items():
-		print("key: {0}, value: {1}".format(key, value))
+# @app.route('/submit')
+# def submit():
+	# for key, value in request.form.items():
+		# print("key: {0}, value: {1}".format(key, value))
 	# userText = str(request.form['msg'])
-	return reply(sym_spell,"hello")
+	# return reply(sym_spell,"hello")
 
 
 
@@ -293,4 +286,4 @@ def answer():
 
 
 if __name__=='__main__':
-	app.run(debug=True)
+	app.run()
