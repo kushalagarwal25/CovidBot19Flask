@@ -1,7 +1,6 @@
+urllib3
 scipy
-urllib
 Click==7.0
-codecs
 itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
@@ -14,7 +13,7 @@ nltk==3.5
 numpy==1.19.0
 packaging==20.4
 pandas==1.0.5
-pickle
+pickle-mixin
 pipwin==0.5.0
 PyAudio==0.2.11pycairo==1.16
 requests==2.22.0

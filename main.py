@@ -6,14 +6,9 @@ from symspellpy import SymSpell, Verbosity
 import nltk 
 from nltk.corpus import wordnet
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-import codecs
-from scipy import spatial
-from sklearn.manifold import TSNE
 import pickle
 import clean_text2 as ct2
-from urllib.request import urlopen
 import speech_recognition as sr
 from googletrans import Translator
 
