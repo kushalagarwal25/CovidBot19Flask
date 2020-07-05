@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import clean_text2 as ct2
-import speech_recognition as sr
+# import speech_recognition as sr
 from googletrans import Translator
 
 
